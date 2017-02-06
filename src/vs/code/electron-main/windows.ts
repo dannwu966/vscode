@@ -395,15 +395,22 @@ export class WindowsManager implements IWindowsMainService {
 			let openFilesInNewWindow: boolean;
 			if (openConfig.forceNewWindow || openConfig.forceReuseWindow) {
 				openFilesInNewWindow = openConfig.forceNewWindow && !openConfig.forceReuseWindow;
+				console.log('openConfig set to force. forceNewWindow: ' + openConfig.forceNewWindow + ', forceReuseWindow: ' + openConfig.forceReuseWindow);
 			} else {
 				if (openConfig.context === OpenContext.DOCK) {
 					openFilesInNewWindow = true; // only on macOS do we allow to open files in a new window if this is triggered via DOCK context
+					console.log('openConfig set to true because OpenContext === DOCK');
 				}
+
+				console.log('extension development?: ' + !!openConfig.cli.extensionDevelopmentPath);
+				console.log('windowConfig is: ' + windowConfig && windowConfig.openFilesInNewWindow);
 
 				if (!openConfig.cli.extensionDevelopmentPath && windowConfig && (windowConfig.openFilesInNewWindow === 'on' || windowConfig.openFilesInNewWindow === 'off' || <any>windowConfig.openFilesInNewWindow === false /* TODO@Ben migration */)) {
 					openFilesInNewWindow = (windowConfig.openFilesInNewWindow === 'on');
 				}
 			}
+
+			console.log('Final openFilesInNewWindow: ' + openFilesInNewWindow);
 
 			// Open Files in last instance if any and flag tells us so
 			const lastActiveWindow = this.getLastActiveWindow();

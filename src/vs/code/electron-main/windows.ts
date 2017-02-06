@@ -403,7 +403,7 @@ export class WindowsManager implements IWindowsMainService {
 				}
 
 				console.log('extension development?: ' + !!openConfig.cli.extensionDevelopmentPath);
-				console.log('windowConfig is: ' + windowConfig && windowConfig.openFilesInNewWindow);
+				console.log('windowConfig is: ' + windowConfig.openFilesInNewWindow);
 
 				if (!openConfig.cli.extensionDevelopmentPath && windowConfig && (windowConfig.openFilesInNewWindow === 'on' || windowConfig.openFilesInNewWindow === 'off' || <any>windowConfig.openFilesInNewWindow === false /* TODO@Ben migration */)) {
 					openFilesInNewWindow = (windowConfig.openFilesInNewWindow === 'on');
